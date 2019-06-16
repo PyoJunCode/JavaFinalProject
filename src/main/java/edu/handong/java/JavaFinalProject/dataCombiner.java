@@ -45,8 +45,6 @@ public class dataCombiner {
 		finalName = resultPath.split("\\.");
 		
 		
-		//extension = resultPath.split(".")[1];
-		
 		writer();
 
 	}

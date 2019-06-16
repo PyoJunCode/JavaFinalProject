@@ -10,8 +10,8 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
 
 public class ZipReader extends Thread {
 	
-	String filePath;
-	String fileName;
+	private String filePath;
+	private String fileName;
 	private ArrayList<ExcelReader> eachEx = new ArrayList<ExcelReader>() ; 
 	private ArrayList<ExcelReader> eachEx2 = new ArrayList<ExcelReader>() ;
 

@@ -17,7 +17,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class ExcelReader {
 	
-	ArrayList<String> datas = new ArrayList<String>();
+	private ArrayList<String> datas = new ArrayList<String>();
 	
 	public ArrayList<String> getDatas(){
 		return datas;
