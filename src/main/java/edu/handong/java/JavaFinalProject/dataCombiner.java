@@ -211,6 +211,7 @@ public class dataCombiner {
 					"(keyword,쉽표로 구분)", "조회날짜", "실제자료조회\n" + 
 							"출처 (웹자료링크)", "원출처 (기관명 등)", "제작자\n" + 
 									"(Copyright 소유처)" ));
+			
 			CSVPrinter csvPrinter2 = new CSVPrinter(bw2, CSVFormat.DEFAULT.withHeader("Num", "제목(반드시 요약문 양식에 입력한 제목과 같아야 함.)", "표/그림 일련번호", "자료유형(표,그림,…)", "자료에 나온 표나 그림 설명(캡션)", "자료가 나온 쪽번호"));
 			int count = 0;
 			for(ZipReader zip : inDirFiles) {
@@ -230,12 +231,14 @@ public class dataCombiner {
 				for(ExcelReader list : zip.getExcelReader2()) {
 					for(String str : list.getDatas() ) {
 						//System.out.println(str);
-						if(!str.equals("")) {
+						if(!str.equals("")) { 
+							//System.out.println("data : " + str);
 							//System.out.println("Title : " + count++ + str);
 							String[] splited = str.split("#");
 							
-							if(splited.length == 5)
+							if(splited.length == 5 && !splited[0].contains("제목"))
 							csvPrinter2.printRecord(zip.getFileName().substring(1,4), splited[0],splited[1],splited[2],splited[3],splited[4]);
+							else if(splited.length == 4) csvPrinter2.printRecord(zip.getFileName().substring(1,4), "" ,splited[0],splited[1],splited[2],splited[3]);
 						
 						}
 					}

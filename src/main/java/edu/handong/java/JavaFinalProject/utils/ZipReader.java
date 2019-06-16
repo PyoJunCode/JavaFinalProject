@@ -47,21 +47,20 @@ public class ZipReader extends Thread {
 		    		
 		    		if(entry.getName().contains("요약문")) {
 		    			ExcelReader myReader = new ExcelReader(stream);
-		    			eachEx.add(myReader); //why fileType should be first?
+		    			eachEx.add(myReader); 
+		    			
 		    		}
 		    		else if(entry.getName().contains("표")) {
-		    			ExcelReader myReader = new ExcelReader(stream);
-		    			eachEx2.add(myReader); //why fileType should be first?
+		    			ExcelReader myReader2 = new ExcelReader(stream);
+		    			eachEx2.add(myReader2); 
+		    			
 		    		}
 		    		
-		       
-		    		
-		    
 		       
 		    }
 		    	
 		    }
-		    if(eachEx.isEmpty()) System.out.println("is Empty");
+		   
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

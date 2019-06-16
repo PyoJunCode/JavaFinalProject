@@ -33,7 +33,8 @@ public class ExcelReader {
 		        Workbook wb = WorkbookFactory.create(inp);
 		        Sheet sheet = wb.getSheetAt(0);
 		        Iterator<Row> iterator = sheet.iterator();
-		        iterator.next();
+		        iterator.next(); //pass header
+		        
 		        while(iterator.hasNext()) { //row 
 		        	Row currentRow = iterator.next();
 		        	Iterator<Cell> cellIt= currentRow.cellIterator();
@@ -49,7 +50,7 @@ public class ExcelReader {
 		        			//System.out.println(currentCell.getNumericCellValue());
 		        			concatData += currentCell.getNumericCellValue() + "#";
 		        		}
-		        		else if(currentCell.getCellType() == CellType.BLANK && cellIt.hasNext()) {
+		        		else if(currentCell.getCellType() == CellType.BLANK) {
 		        			
 		        			concatData += "" + "#";
 		        		}
