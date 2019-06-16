@@ -41,10 +41,6 @@ public class dataCombiner {
 		
 		parseOptions(options, args);
 		
-		
-		finalName = resultPath.split("\\.");
-		
-		
 		writer();
 
 	}
@@ -96,6 +92,16 @@ public class dataCombiner {
 
 			dataPath = cmd.getOptionValue("i");
 			resultPath = cmd.getOptionValue("o");
+			finalName = resultPath.split("\\.");
+			
+			try {
+				if(!finalName[1].equals("csv"))
+					throw new customException("Result file name type must be XXX.csv");
+			}
+			catch (customException e){
+				System.out.println(e.getMessage());
+				System.exit(-1);
+			}
 			
 			
 
@@ -106,10 +112,10 @@ public class dataCombiner {
 					fullPath = filetest.getCanonicalPath(); // convert to absolute path for convenient.
 				}
 				else if(filetest.isFile()) {
-					throw new customException("Please unzip mother zip first.");
+					throw new customException("It is not a Folder directory. Please unzip mother zip first.");
 				}
 				else {
-					throw new customException("Error : unexpected data. Please check error.csv");
+					throw new customException("Error : unexpected data. Please check your path or file.");
 				}
 				
 				
@@ -213,12 +219,12 @@ public class dataCombiner {
 									"(Copyright 소유처)" ));
 			
 			CSVPrinter csvPrinter2 = new CSVPrinter(bw2, CSVFormat.DEFAULT.withHeader("Num", "제목(반드시 요약문 양식에 입력한 제목과 같아야 함.)", "표/그림 일련번호", "자료유형(표,그림,…)", "자료에 나온 표나 그림 설명(캡션)", "자료가 나온 쪽번호"));
-			int count = 0;
+			
 			for(ZipReader zip : inDirFiles) {
 				for(ExcelReader list : zip.getExcelReader()) {
 					for(String str : list.getDatas() ) {
 						if(!str.equals("")) {
-							//System.out.println("Title : " + count++ + str);
+							
 							String[] splited = str.split("#");
 							
 							if(splited.length == 7)
@@ -230,10 +236,9 @@ public class dataCombiner {
 				
 				for(ExcelReader list : zip.getExcelReader2()) {
 					for(String str : list.getDatas() ) {
-						//System.out.println(str);
+						
 						if(!str.equals("")) { 
-							//System.out.println("data : " + str);
-							//System.out.println("Title : " + count++ + str);
+							
 							String[] splited = str.split("#");
 							
 							if(splited.length == 5 && !splited[0].contains("제목"))
@@ -247,7 +252,7 @@ public class dataCombiner {
 				
 			}
 			
-			System.out.println("Write Done");
+			System.out.println("Success!! -Have a good vacation-");
 			
 			csvPrinter.flush();
 			csvPrinter.close();
